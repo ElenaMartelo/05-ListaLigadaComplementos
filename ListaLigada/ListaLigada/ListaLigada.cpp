@@ -70,7 +70,7 @@ void menu()
 
 void inicializar()
 {
-	// se a lista já possuir elementos
+	// se a lista jÃ¡ possuir elementos
 // libera a memoria ocupada
 	NO* aux = primeiro;
 	while (aux != NULL) {
@@ -125,21 +125,32 @@ void inserirElemento()
 	cin >> novo->valor;
 	novo->prox = NULL;
 
+	NO* existe = posicaoElemento(novo->valor);
+
+
 	if (primeiro == NULL)
 	{
 		primeiro = novo;
+		ultimo = novo;
 	}
 	else
 	{
-		// procura o final da lista
-		NO* aux = primeiro;
-		while (aux->prox != NULL) {
-			aux = aux->prox;
+		ultimo->prox = novo;
+		ultimo = novo;
+	}
+
+	NO* aux = primeiro;
+	while (aux->prox != NULL) {
+		if (aux->valor > novo->valor)
+		{
+			int sub = novo->valor;
+			novo->valor = aux->valor;
+			aux->valor = sub;
 		}
-		aux->prox = novo;
+
+		aux = aux->prox;
 	}
 }
-
 void excluirElemento()
 {
 
